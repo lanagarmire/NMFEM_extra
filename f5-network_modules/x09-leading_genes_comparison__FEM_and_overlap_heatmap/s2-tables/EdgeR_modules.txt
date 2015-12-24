@@ -1,0 +1,6 @@
+seed	size	connectivity	p_values	first_term	first_fisher	second_term	second_fisher
+Aldh6a1	36	8.11111111111111	0.004	aerobic respiration	1.0e-16	tricarboxylic acid cycle	2.0e-16
+Thbs1	16	3.875	0.008	cell adhesion	1.0e-05	biological adhesion	1.0e-05
+Gna13	32	4.6875	0.017	G-protein coupled receptor signaling pathway	1.8e-13	semaphorin-plexin signaling pathway	2.5e-13
+Tpr	58	12.2413793103448	0.02	proteolysis involved in cellular protein catabolic process	5.0e-18	cellular protein catabolic process	1.3e-17
+Por	12	7.33333333333333	0.03	single-organism catabolic process	1.8e-05	cellular catabolic process	5.8e-05

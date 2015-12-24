@@ -1,0 +1,6 @@
+seed	size	connectivity	p_values	first_term	first_fisher	second_term	second_fisher
+Rbpms	25	4.16	0.025	regulation of RNA splicing	2.0e-05	negative regulation of RNA splicing	2.7e-05
+Adm	13	4	0.098	cyclic nucleotide biosynthetic process	5.2e-23	cyclic purine nucleotide metabolic process	5.2e-23
+Rlim	12	4.83333333333333	0.101	negative regulation of erythrocyte differentiation	4.3e-05	regulation of transcription, DNA-templated	9.2e-05
+Col4a2	22	6.09090909090909	0.123	extracellular matrix organization	3.1e-07	extracellular structure organization	3.1e-07
+Igf1	15	4.93333333333333	0.151	regulation of insulin-like growth factor receptor signaling pathway	2.2e-11	insulin-like growth factor receptor signaling pathway	5.7e-10
