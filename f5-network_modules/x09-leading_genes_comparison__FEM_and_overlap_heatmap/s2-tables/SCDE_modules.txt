@@ -1,6 +1,0 @@
-seed	size	connectivity	p_values	first_term	first_fisher	second_term	second_fisher
-Sdhb	33	7.6969696969697	0.005	aerobic respiration	3.8e-17	tricarboxylic acid cycle	8.1e-17
-Polr2l	75	12.88	0.006	nucleobase-containing compound biosynthetic process	2.5e-14	aromatic compound biosynthetic process	5.9e-14
-Ldha	33	7.6969696969697	0.009	aerobic respiration	3.8e-17	tricarboxylic acid cycle	8.1e-17
-Ndufv2	24	7.66666666666667	0.009	oxidation-reduction process	6.5e-08	response to protozoan	0.00024
-Thbs1	16	3.875	0.018	cell adhesion	1.0e-05	biological adhesion	1.0e-05

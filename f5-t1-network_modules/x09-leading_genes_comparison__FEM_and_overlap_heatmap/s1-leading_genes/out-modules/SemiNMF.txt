@@ -1,0 +1,6 @@
+seed	size	connectivity	p_values	first_term	first_fisher	second_term	second_fisher
+Scfd1	11	5.81818181818182	0.015	Golgi vesicle transport	7.1e-15	ER to Golgi vesicle-mediated transport	7.7e-14
+Ubqln4	68	4	0.04	mitral valve development	0.0013	heart valve formation	0.0017
+Taf12	49	9.71428571428571	0.087	DNA-templated transcription, initiation	3.0e-15	transcription initiation from RNA polymerase II promoter	2.0e-14
+Krr1	64	17.4375	0.105	rRNA processing	< 1e-30	rRNA metabolic process	< 1e-30
+Med17	54	8.51851851851852	0.11	nucleobase-containing compound metabolic process	2.2e-16	RNA metabolic process	2.5e-16

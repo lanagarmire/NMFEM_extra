@@ -1,6 +1,0 @@
-seed	size	connectivity	p_values	first_term	first_fisher	second_term	second_fisher
-Hdac2	92	5.8695652173913	0.003	chromatin organization	6.1e-29	negative regulation of nucleic acid-templated transcription	1.5e-27
-Twistnb	46	13.1304347826087	0.003	transcription from RNA polymerase III promoter	3.7e-14	nucleobase-containing compound biosynthetic process	6.1e-13
-Dld	73	8.02739726027397	0.004	carboxylic acid metabolic process	1.8e-29	oxoacid metabolic process	9.0e-29
-Sdhb	33	7.6969696969697	0.005	aerobic respiration	3.8e-17	tricarboxylic acid cycle	8.1e-17
-Ndufv2	24	7.66666666666667	0.012	oxidation-reduction process	6.5e-08	response to protozoan	0.00024

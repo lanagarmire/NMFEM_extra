@@ -1,6 +1,0 @@
-seed	size	connectivity	p_values	first_term	first_fisher	second_term	second_fisher
-Med31	73	8.13698630136986	0.007	stem cell maintenance	1.4e-13	RNA metabolic process	1.9e-13
-Gna13	32	4.6875	0.01	G-protein coupled receptor signaling pathway	1.8e-13	semaphorin-plexin signaling pathway	2.5e-13
-Smad4	52	4.23076923076923	0.018	BMP signaling pathway	0.00012	regulation of BMP signaling pathway	0.00031
-Exosc4	42	7.85714285714286	0.023	rRNA catabolic process	1.1e-16	rRNA processing	4.7e-16
-Pnn	14	3.85714285714286	0.025	mRNA destabilization	2.8e-05	RNA destabilization	5.9e-05

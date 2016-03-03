@@ -8,7 +8,7 @@ library(dplyr)
 
 leading_genes_list <- list()
 leading_genes_list[['NMF']] <- readRDS('leading_genes/leadingGenesNMF.RDS')
-leading_genes_list[['SemiNMF']] <- readRDS('leading_genes/leadingGenesSemiNMF.RDS')
+#leading_genes_list[['SemiNMF']] <- readRDS('leading_genes/leadingGenesSemiNMF.RDS')
 #leading_genes_list[['B2013']] <- readRDS('leading_genes/leadingGenesB2013.RDS')
 leading_genes_list[['SCDE']] <- readRDS('leading_genes/leadingGenesSCDE.RDS')
 leading_genes_list[['MAST']] <- readRDS('leading_genes/leadingGenesMAST_B2013.RDS')
@@ -36,12 +36,13 @@ ma_ggdat <- data.frame(gene=rownames(se),
 
 gen_data_frame <- function(method_name) ma_ggdat %>% mutate(is_exclusive=gene %in% leading_genes_list[[method_name]], method=method_name)
 
-ggdat <- bind_rows(lapply(names(leading_genes_list), function(x)gen_data_frame(x)))
-ggdat$method <- factor(ggdat$method, levels=names(leading_genes_list))
+ggdat <- bind_rows(lapply(names(leading_genes_list), function(x)gen_data_frame(x))) %>%
+  mutate(method=factor(method, levels=names(leading_genes_list))) %>%
+  mutate(is_exclusive=factor(is_exclusive, labels=c('No', 'Yes')))
 
 ggplot(ggdat) +
-  geom_point(aes(x=a, y=m, color=is_exclusive, alpha=is_exclusive), size=1.5, subset=.(is_exclusive==F)) +
-  geom_point(aes(x=a, y=m, color=is_exclusive, alpha=is_exclusive), size=1.5, subset=.(is_exclusive==T)) +
+  geom_point(aes(x=a, y=m, color=is_exclusive, alpha=is_exclusive), ggdat %>% filter(is_exclusive=='No'), size=1.5) +
+  geom_point(aes(x=a, y=m, color=is_exclusive, alpha=is_exclusive), ggdat %>% filter(is_exclusive=='Yes'), size=1.5) +
   geom_segment(aes(x=-0.05, y=0, xend=0.5-0.05, yend=(sum(phe=='E14.5')/sum(phe=='E16.5')+1)*0.5), linetype=3, size=0.5) +
   geom_segment(aes(x=-0.05, y=0, xend=0.95, yend=-sum(phe=='E16.5')/sum(phe=='E14.5')-1), linetype=3, size=0.5) +
   facet_wrap(~ method, ncol=2) +
@@ -50,8 +51,8 @@ ggplot(ggdat) +
   labs(x='A', y='M') +
   ggtitle('MA-plot')
 
-ggsave('../s2.plots/maplot.pdf', width=10, height=12)
-ggsave('../s2.plots/maplot.png', width=10, height=12)
+ggsave('../s2.plots/maplot.pdf', width=10, height=10)
+ggsave('../s2.plots/maplot.png', width=10, height=10)
 
 ###################
 

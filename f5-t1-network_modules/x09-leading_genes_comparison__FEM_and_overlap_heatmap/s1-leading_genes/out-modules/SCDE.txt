@@ -1,0 +1,6 @@
+seed	size	connectivity	p_values	first_term	first_fisher	second_term	second_fisher
+Ldha	33	7.6969696969697	0.005	aerobic respiration	3.8e-17	tricarboxylic acid cycle	8.1e-17
+Polr2l	75	12.88	0.007	nucleobase-containing compound biosynthetic process	2.5e-14	aromatic compound biosynthetic process	5.9e-14
+Ndufv2	24	7.66666666666667	0.01	oxidation-reduction process	6.5e-08	response to protozoan	0.00024
+Sdhb	33	7.6969696969697	0.012	aerobic respiration	3.8e-17	tricarboxylic acid cycle	8.1e-17
+Psmb3	58	12.2413793103448	0.015	proteolysis involved in cellular protein catabolic process	5.0e-18	cellular protein catabolic process	1.3e-17

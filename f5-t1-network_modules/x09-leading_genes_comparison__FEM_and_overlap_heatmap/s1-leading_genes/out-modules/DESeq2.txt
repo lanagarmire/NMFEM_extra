@@ -1,0 +1,6 @@
+seed	size	connectivity	p_values	first_term	first_fisher	second_term	second_fisher
+Gfm2	10	8	0.003	single-organism catabolic process	0.0014	cellular catabolic process	0.0017
+Aldh6a1	36	8.11111111111111	0.004	aerobic respiration	1.0e-16	tricarboxylic acid cycle	2.0e-16
+Sdhb	33	7.6969696969697	0.004	aerobic respiration	3.8e-17	tricarboxylic acid cycle	8.1e-17
+Polr2l	75	12.88	0.005	nucleobase-containing compound biosynthetic process	2.5e-14	aromatic compound biosynthetic process	5.9e-14
+Twistnb	46	13.1304347826087	0.005	transcription from RNA polymerase III promoter	3.7e-14	nucleobase-containing compound biosynthetic process	6.1e-13

@@ -1,0 +1,7 @@
+NMF
+SemiNMF
+MAST
+SCDE
+Monocle
+DESeq2
+EdgeR

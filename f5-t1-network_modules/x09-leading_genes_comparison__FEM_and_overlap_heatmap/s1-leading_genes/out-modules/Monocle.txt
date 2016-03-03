@@ -1,0 +1,6 @@
+seed	size	connectivity	p_values	first_term	first_fisher	second_term	second_fisher
+Rbpms	25	4.16	0.032	regulation of RNA splicing	2.0e-05	negative regulation of RNA splicing	2.7e-05
+Rlim	12	4.83333333333333	0.087	negative regulation of erythrocyte differentiation	4.3e-05	regulation of transcription, DNA-templated	9.2e-05
+Trrap	54	7.92592592592593	0.179	chromatin modification	6.1e-17	chromatin organization	4.9e-16
+Igf1	15	4.93333333333333	0.186	regulation of insulin-like growth factor receptor signaling pathway	2.2e-11	insulin-like growth factor receptor signaling pathway	5.7e-10
+Cd14	10	3.8	0.662	innate immune response	6.8e-10	pattern recognition receptor signaling pathway	1.9e-09

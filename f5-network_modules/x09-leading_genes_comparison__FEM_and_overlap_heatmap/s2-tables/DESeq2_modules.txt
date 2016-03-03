@@ -1,6 +1,0 @@
-seed	size	connectivity	p_values	first_term	first_fisher	second_term	second_fisher
-Gfm2	10	8	0.004	single-organism catabolic process	0.0014	cellular catabolic process	0.0017
-Ndufv2	24	7.66666666666667	0.005	oxidation-reduction process	6.5e-08	response to protozoan	0.00024
-Aldh6a1	36	8.11111111111111	0.007	aerobic respiration	1.0e-16	tricarboxylic acid cycle	2.0e-16
-Gna13	32	4.6875	0.008	G-protein coupled receptor signaling pathway	1.8e-13	semaphorin-plexin signaling pathway	2.5e-13
-Sdhb	33	7.6969696969697	0.008	aerobic respiration	3.8e-17	tricarboxylic acid cycle	8.1e-17

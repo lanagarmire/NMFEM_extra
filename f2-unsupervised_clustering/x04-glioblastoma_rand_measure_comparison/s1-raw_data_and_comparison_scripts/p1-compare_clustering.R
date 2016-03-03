@@ -5,89 +5,69 @@ library(DESeq2)
 library(ggplot2)
 library(zx)
 library(hash)
+library(combinat)
 library(readr)
 library(stringr)
 library(reshape2)
 library(tidyr)
+library(mclust)
 library(dplyr)
+library(NMF)
 
 
-glioSE5 <- readRDS('glioSE5.RDS')
+#==== choose ====#
+data_set_name <- 'glioSE5'
+data_set_name <- 'boneSE'
+data_set_name <- 'hscmSE'
+#================#
 
-phe <- factor(colData(glioSE5)$phenotype)
+se <- readRDS(paste0(data_set_name, '.RDS'))
+
+phe <- factor(colData(se)$phe)
 phes <- levels(phe)
-num_types <- 5
+num_types <- length(phes)
 
-rw <- assays(glioSE5)$normalize
+rw <- assays(se)$rpkm
 rw <- rw[apply(rw, 1, function(x)any(x>0)),]
 
-rwl <- zx::log_trans(rw)
+rwl <- log(rw+1)
 
 
 clusterings <- list()
 
 # NMF ---------------------------------------------------------------------
-library(NMF)
 
-ren5 <- nmf(rwl, rank=5, nrun=30, method="brunet", .options="p32v3", seed=12345)
+ren <- nmf(rwl, rank=num_types, nrun=30, method="brunet", .options="p32v3", seed=12345)
 
 #==== saveRDS ====#
-#saveRDS(ren5, 'ren5.RDS')
+saveRDS(ren, paste0('RDS/ren_', data_set_name, '.RDS'))
 #-----------------#
-ren5 <- readRDS('ren5.RDS')
+ren <- readRDS(paste0('RDS/ren_', data_set_name, '.RDS'))
 #=================#
 
-nmf_cons_mat <- consensus(ren5)
+nmf_cons_mat <- consensus(ren)
 
-clusterings[['NMF']] <- predict(ren5) %>% factor %>% as.numeric
+clusterings[['NMF']] <- predict(ren) %>% factor %>% as.numeric
 #   -----------------------------------------------------------------------
-
-
 
 # SemiNMF -----------------------------------------------------------------
-glioClustersSemiNMF <- readRDS('glioClustersSemiNMF.RDS')
-clusterings[['SemiNMF']] <- glioClustersSemiNMF %>% factor %>% as.numeric
+#glioClustersSemiNMF <- readRDS('glioClustersSemiNMF.RDS')
+#clusterings[['SemiNMF']] <- glioClustersSemiNMF %>% factor %>% as.numeric
 #   -----------------------------------------------------------------------
 
-
-# tSNE --------------------------------------------------------------------
-library(Rtsne)
-
-ret <- Rtsne(t(rwl))
-
-rwt <- t(ret$Y)
-
-#==== RDS ====#
-#saveRDS(rwt, paste0('RDS/rwt.RDS'))
-#-------------#
-rwt <- readRDS(paste0('RDS/rwt.RDS'))
-#=============#
-
-
-#==== plot ====#
-# ggdat <- data.frame(x=ret$Y[,1], y=ret$Y[,2])
-# 
-# ggplot() +
-#  geom_point(aes(x=x, y=y, color=phe), ggdat)
-# 
-# ggplot() +
-#  geom_point(aes(x=x, y=y, color=predict(ren)), ggdat)
-#==============#
-#   -----------------------------------------------------------------------
-
-# tSNE + kmeans ------------------------------------------------------------------
+# kmeans ------------------------------------------------------------------
 
 # 30 times average
 kms <- list()
 for (i in 1:30) {
   message(i)
-  kms[[i]] <- kmeans(t(rwt), 5)
+  kms[[i]] <- kmeans(t(rwl), num_types)
 }
 
 #==== saveRDS ====#
-#saveRDS(kms, 'kms.RDS')
+saveRDS(kms, paste0('RDS/kms_', data_set_name, '.RDS'))
 #-----------------#
-kms <- readRDS('kms.RDS')
+kms <- readRDS(paste0('RDS/kms_', data_set_name, '.RDS'))
 #=================#
 
 km_clusters <- lapply(kms, function(x)x$cluster)
@@ -111,14 +91,13 @@ km_cons_mat <- clustering_consensus(km_clusters)
 km_cons <- cutree(hclust(dist(km_cons_mat)), num_types)
 
 
-
 #==== saveRDS ====#
-#saveRDS(km_cons, 'km_cons.RDS')
+saveRDS(km_cons, paste0('RDS/km_cons_', data_set_name, '.RDS'))
 #-----------------#
-km_cons <- readRDS('km_cons.RDS')
+km_cons <- readRDS(paste0('RDS/km_cons_', data_set_name, '.RDS'))
 #=================#
 
-clusterings[['tSNE_Kmeans']] <- km_cons %>% factor %>% as.numeric
+clusterings[['Kmeans']] <- km_cons %>% factor %>% as.numeric
 
 #   -----------------------------------------------------------------------
 
@@ -132,9 +111,9 @@ ggdat_list[['NMF']] <- nmf_cons_mat[dendro_order(nmf_cons_mat), dendro_order(nmf
   melt(c('s1', 's2'), value.name='consensus') %>%
   mutate(method='NMF')
   
-ggdat_list[['tSNE_Kmeans']] <- km_cons_mat[dendro_order(km_cons_mat), dendro_order(km_cons_mat)] %>%
+ggdat_list[['Kmeans']] <- km_cons_mat[dendro_order(km_cons_mat), dendro_order(km_cons_mat)] %>%
   melt(c('s1', 's2'), value.name='consensus') %>%
-  mutate(method='tSNE_Kmeans')
+  mutate(method='Kmeans')
 
 ggdat <- bind_rows(ggdat_list) %>% mutate(method=factor(method, names(ggdat_list)))
 
@@ -154,7 +133,7 @@ ggsave('../s2-plots/consensus.pdf', width=7, height=3)
 
 ggdat_color_bar_list <- list()
 ggdat_color_bar_list[['NMF']] <- data.frame(method='NMF', phe=phe[dendro_order(nmf_cons_mat)]) %>% add_rownames('x') %>% mutate(x=as.double(x))
-ggdat_color_bar_list[['tSNE + Kmeans']] <- data.frame(method='tSNE + Kmeans', phe=phe[dendro_order(km_cons_mat)]) %>% add_rownames('x') %>% mutate(x=as.double(x))
+ggdat_color_bar_list[['Kmeans']] <- data.frame(method='Kmeans', phe=phe[dendro_order(km_cons_mat)]) %>% add_rownames('x') %>% mutate(x=as.double(x))
 ggdat_color_bar <- bind_rows(ggdat_color_bar_list) %>% mutate(method=factor(method, names(ggdat_list)))
 
 ggplot() +
@@ -166,44 +145,35 @@ ggsave('../s2-plots/consensus_color_bar.pdf', width=7, height=3)
 #============================#
 
 
-# DBSCAN ------------------------------------------------------------------
-# library(fpc)
-# 
-# red <- dbscan(t(rwl))
-# red
-# plot(red, t(rwl[c(13,41), ]))
-# red$cluster
-# 
-# dist(t(rwl[1:10, 1:5]))
-#   -----------------------------------------------------------------------
+# Mclust ------------------------------------------------------------------
 
+# this takes a long time and the generated object is HUGE
+mclust_results <- Mclust(t(rwl), G=num_types)
 
-# tSNE + Mclust ------------------------------------------------------------------
-library(mclust)
-
-
-mclust_results <- Mclust(t(rwt), G=5)
+# so I save this instead
+mclust_zs <- mclust_results$z
 
 #==== RDS ====#
-#saveRDS(mclust_results, 'mclust_results.RDS')
+saveRDS(mclust_zs, paste0('RDS/mclust_zs_', data_set_name, '.RDS'))
 #-------------#
-mclust_results <- readRDS('mclust_results.RDS')
+mclust_zs <- readRDS(paste0('RDS/mclust_zs_', data_set_name, '.RDS'))
 #=============#
 
-cls <- apply(mclust_results$z, 1, which.max)
-clusterings[['tSNE_Mclust']] <- cls %>% factor %>% as.numeric
+cls <- apply(mclust_zs, 1, which.max)
+
+
+clusterings[['Mclust']] <- cls %>% factor %>% as.numeric
 #   -----------------------------------------------------------------------
 
 
-# tSNE + Hclust ------------------------------------------------------------------
-hc <- cutree(hclust(dist(t(rwt))), 5)
-clusterings[['tSNE_Hclust']] <- hc %>% factor %>% as.numeric
+# Hclust ------------------------------------------------------------------
+hc <- cutree(hclust(dist(t(rwl))), num_types)
+clusterings[['Hclust']] <- hc %>% factor %>% as.numeric
 #   -----------------------------------------------------------------------
 
 
 # get clusterings ---------------------------------------------------------
 
-library(combinat)
 
 phes <- levels(phe)
 perms <- phes %>% length %>% permn
@@ -218,9 +188,9 @@ best_clusterings <- lapply(clusterings, function(c) {
 best_clusterings <- c(list(Labels=phe), best_clusterings)
 
 #==== RDS ====#
-#saveRDS(best_clusterings, 'best_clusterings.RDS')
+saveRDS(best_clusterings, paste0('RDS/best_clusterings_', data_set_name, '.RDS'))
 #-------------#
-best_clusterings <- readRDS('best_clusterings.RDS')
+best_clusterings <- readRDS(paste0('RDS/best_clusterings_', data_set_name, '.RDS'))
 #=============#
 
 #   -----------------------------------------------------------------------
@@ -233,9 +203,9 @@ rand_measures <- sapply(best_clusterings, function(c){
 })
 
 #==== RDS ====#
-#saveRDS(rand_measures, 'rand_measures.RDS')
+saveRDS(rand_measures, paste0('RDS/rand_measures_', data_set_name, '.RDS'))
 #-------------#
-rand_measures <- readRDS('rand_measures.RDS')
+rand_measures <- readRDS(paste0('RDS/rand_measures_', data_set_name, '.RDS'))
 #=============#
 
 #   -----------------------------------------------------------------------
@@ -293,7 +263,7 @@ ggplot() +
   scale_shape_manual(values=c(4, 16)) + 
   labs(x='PC1', y='PC2') +
   theme_gray(base_size=18)
-ggsave('../s2-plots/scatter_plot.pdf')
+ggsave('../s2-plots/scatter_plot.pdf', height=8, width=12)
   
 #   -----------------------------------------------------------------------
 
@@ -322,7 +292,7 @@ ggplot() +
   scale_fill_continuous(name=wrap_format(10)('number of occurrences')) +
   theme_gray(base_size=18) + 
   theme(axis.text.x=element_text(hjust=1, vjust=1, angle=45))
-ggsave('../s2-plots/confusion_matrices.pdf')
+ggsave('../s2-plots/confusion_matrices.pdf', height=7, width=10)
 
 #   -----------------------------------------------------------------------
 

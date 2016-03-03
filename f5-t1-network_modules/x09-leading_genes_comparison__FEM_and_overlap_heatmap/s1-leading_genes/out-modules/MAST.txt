@@ -1,0 +1,6 @@
+seed	size	connectivity	p_values	first_term	first_fisher	second_term	second_fisher
+Rbpms	25	4.16	0.024	regulation of RNA splicing	2.0e-05	negative regulation of RNA splicing	2.7e-05
+Rlim	12	4.83333333333333	0.095	negative regulation of erythrocyte differentiation	4.3e-05	regulation of transcription, DNA-templated	9.2e-05
+Col4a2	22	6.09090909090909	0.143	extracellular matrix organization	3.1e-07	extracellular structure organization	3.1e-07
+Trrap	54	7.92592592592593	0.16	chromatin modification	6.1e-17	chromatin organization	4.9e-16
+Trappc5	11	6.18181818181818	0.483	ER to Golgi vesicle-mediated transport	4.3e-07	Golgi vesicle transport	6.9e-07

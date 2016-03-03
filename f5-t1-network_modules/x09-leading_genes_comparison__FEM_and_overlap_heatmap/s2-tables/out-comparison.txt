@@ -1,0 +1,43 @@
+seed	size	connectivity	p_values	first_term	first_fisher	second_term	second_fisher
+NMF
+Med31	73	8.13698630136986	0.007	stem cell maintenance	1.4e-13	RNA metabolic process	1.9e-13
+Exosc4	42	7.85714285714286	0.016	rRNA catabolic process	1.1e-16	rRNA processing	4.7e-16
+Gna13	32	4.6875	0.017	G-protein coupled receptor signaling pathway	1.8e-13	semaphorin-plexin signaling pathway	2.5e-13
+Smad4	52	4.23076923076923	0.02	BMP signaling pathway	0.00012	regulation of BMP signaling pathway	0.00031
+Pnn	14	3.85714285714286	0.03	mRNA destabilization	2.8e-05	RNA destabilization	5.9e-05
+SemiNMF
+Scfd1	11	5.81818181818182	0.015	Golgi vesicle transport	7.1e-15	ER to Golgi vesicle-mediated transport	7.7e-14
+Ubqln4	68	4	0.04	mitral valve development	0.0013	heart valve formation	0.0017
+Taf12	49	9.71428571428571	0.087	DNA-templated transcription, initiation	3.0e-15	transcription initiation from RNA polymerase II promoter	2.0e-14
+Krr1	64	17.4375	0.105	rRNA processing	< 1e-30	rRNA metabolic process	< 1e-30
+Med17	54	8.51851851851852	0.11	nucleobase-containing compound metabolic process	2.2e-16	RNA metabolic process	2.5e-16
+MAST
+Rbpms	25	4.16	0.024	regulation of RNA splicing	2.0e-05	negative regulation of RNA splicing	2.7e-05
+Rlim	12	4.83333333333333	0.095	negative regulation of erythrocyte differentiation	4.3e-05	regulation of transcription, DNA-templated	9.2e-05
+Col4a2	22	6.09090909090909	0.143	extracellular matrix organization	3.1e-07	extracellular structure organization	3.1e-07
+Trrap	54	7.92592592592593	0.16	chromatin modification	6.1e-17	chromatin organization	4.9e-16
+Trappc5	11	6.18181818181818	0.483	ER to Golgi vesicle-mediated transport	4.3e-07	Golgi vesicle transport	6.9e-07
+SCDE
+Ldha	33	7.6969696969697	0.005	aerobic respiration	3.8e-17	tricarboxylic acid cycle	8.1e-17
+Polr2l	75	12.88	0.007	nucleobase-containing compound biosynthetic process	2.5e-14	aromatic compound biosynthetic process	5.9e-14
+Ndufv2	24	7.66666666666667	0.01	oxidation-reduction process	6.5e-08	response to protozoan	0.00024
+Sdhb	33	7.6969696969697	0.012	aerobic respiration	3.8e-17	tricarboxylic acid cycle	8.1e-17
+Psmb3	58	12.2413793103448	0.015	proteolysis involved in cellular protein catabolic process	5.0e-18	cellular protein catabolic process	1.3e-17
+Monocle
+Rbpms	25	4.16	0.032	regulation of RNA splicing	2.0e-05	negative regulation of RNA splicing	2.7e-05
+Rlim	12	4.83333333333333	0.087	negative regulation of erythrocyte differentiation	4.3e-05	regulation of transcription, DNA-templated	9.2e-05
+Trrap	54	7.92592592592593	0.179	chromatin modification	6.1e-17	chromatin organization	4.9e-16
+Igf1	15	4.93333333333333	0.186	regulation of insulin-like growth factor receptor signaling pathway	2.2e-11	insulin-like growth factor receptor signaling pathway	5.7e-10
+Cd14	10	3.8	0.662	innate immune response	6.8e-10	pattern recognition receptor signaling pathway	1.9e-09
+DESeq2
+Gfm2	10	8	0.003	single-organism catabolic process	0.0014	cellular catabolic process	0.0017
+Aldh6a1	36	8.11111111111111	0.004	aerobic respiration	1.0e-16	tricarboxylic acid cycle	2.0e-16
+Sdhb	33	7.6969696969697	0.004	aerobic respiration	3.8e-17	tricarboxylic acid cycle	8.1e-17
+Polr2l	75	12.88	0.005	nucleobase-containing compound biosynthetic process	2.5e-14	aromatic compound biosynthetic process	5.9e-14
+Twistnb	46	13.1304347826087	0.005	transcription from RNA polymerase III promoter	3.7e-14	nucleobase-containing compound biosynthetic process	6.1e-13
+EdgeR
+Aldh6a1	36	8.11111111111111	0.002	aerobic respiration	1.0e-16	tricarboxylic acid cycle	2.0e-16
+Gna13	32	4.6875	0.012	G-protein coupled receptor signaling pathway	1.8e-13	semaphorin-plexin signaling pathway	2.5e-13
+Thbs1	16	3.875	0.014	cell adhesion	1.0e-05	biological adhesion	1.0e-05
+Tpr	58	12.2413793103448	0.026	proteolysis involved in cellular protein catabolic process	5.0e-18	cellular protein catabolic process	1.3e-17
+Por	12	7.33333333333333	0.027	single-organism catabolic process	1.8e-05	cellular catabolic process	5.8e-05
