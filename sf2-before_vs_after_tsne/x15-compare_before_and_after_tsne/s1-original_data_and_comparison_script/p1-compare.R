@@ -82,10 +82,36 @@ ggdat <- data.frame(x=ret$Y[,1], y=ret$Y[,2])
 
 ggplot() +
   geom_point(aes(x=x, y=y, color=phe), ggdat)
-
-ggplot() +
-  geom_point(aes(x=x, y=y, color=predict(ren)), ggdat)
 #==============#
+
+artifacts <- rwt[2,] <= -2 & rwt[1,] > -1
+
+pr <- prcomp(t(rw))
+
+ggdat <- data.frame(x=pr$x[,1], y=pr$x[,2], artifacts=artifacts, phe=phe)
+
+ggplot() + 
+  geom_point(aes(x=x, y=y, color=phe, shape=artifacts), ggdat, size=3, alpha=0.1) +
+  labs(x='PC1', y='PC2') +
+  scale_color_brewer(type='qual', palette=6) + 
+  scale_shape_manual(values=c(4, 16)) + 
+  theme_gray(base_size=18)
+
+ggdat <- melt(rwl) %>% tbl_df %>%
+  mutate(artifacts=artifacts[Var2]) %>%
+  filter(value>0)
+
+ggplot(ggdat) +
+  geom_point(aes(x=Var2, y=value, color=artifacts), position=position_jitter(width=0.8), alpha=0.5)
+
+ggdat <- melt(rwl) %>% tbl_df %>%
+  mutate(artifacts=artifacts[Var2]) %>%
+  filter(value>0) %>%
+  group_by(Var2) %>%
+  summarize(avg=sum(value))
+
+ggplot(ggdat) +
+  geom_bar(aes(x=Var2, y=avg, fill=artifacts), stat='identity')
 
 #   -----------------------------------------------------------------------
 

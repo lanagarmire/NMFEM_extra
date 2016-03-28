@@ -12,7 +12,7 @@ library(dplyr)
 
 se <- readRDS('epitSE2.RDS')
 rw <- assays(se)$fpkm
-rwl <- zx::log_trans(rw)
+rwl <- log(rw+1)
 phe <- colData(se)$phe
 
 leading_genes <- list()
@@ -20,9 +20,9 @@ leading_genes[['NMF']] <- readRDS('leading_genes/leadingGenesNMF.RDS')
 leading_genes[['DESeq2']] <- readRDS('leading_genes/leadingGenesDESeq2.RDS')
 leading_genes[['EdgeR']] <- readRDS('leading_genes/leadingGenesEdgeR.RDS')
 leading_genes[['Monocle']] <- readRDS('leading_genes/leadingGenesMonocle.RDS')
-leading_genes[['B2013']] <- readRDS('leading_genes/leadingGenesB2013.RDS')
+#leading_genes[['B2013']] <- readRDS('leading_genes/leadingGenesB2013.RDS')
 leading_genes[['SCDE']] <- readRDS('leading_genes/leadingGenesSCDE.RDS')
-leading_genes[['SemiNMF']] <- readRDS('leading_genes/leadingGenesSemiNMF.RDS')
+#leading_genes[['SemiNMF']] <- readRDS('leading_genes/leadingGenesSemiNMF.RDS')
 leading_genes[['MAST']] <- readRDS('leading_genes/leadingGenesMAST.RDS')
 
 # intersection heatmap ----------------------------------------------------
@@ -58,7 +58,7 @@ ggplot() +
   geom_text(aes(x=c1, y=c2, label=value), ggdat, color='#55B1F7') + 
   labs(x='method', y='method') +
   scale_fill_continuous(name=wrap_format(10)('number of overlap genes'))
-ggsave('../s2-plots/overlap_plot.pdf')
+ggsave('../s2-plots/overlap_plot.pdf', width=6, height=4.5)
 
 pdf('../s2-plots/dendrogram.pdf', height=3)
 plot(methods_dendro)
